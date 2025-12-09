@@ -1,21 +1,16 @@
 # 🧮 Calculator Agent - AI Builder Challenge Hackathon
 
-## 🎉 Proje Durumu: TAMAMLANDI ✅
+## Projede gizli olan **tüm hatalar** başarıyla tespit edilerek düzeltilmiş, detaylı dokümantasyon oluşturulmuş ve Berkay hocamızın istediği gibi yeni **Unit Converter** modülü ile mimari arttırılmış, profesyonel **CI/CD pipeline** kurulmuş, son olarak **Docker containerization** uygulanmıştır.
 
-**Geliştirici:** Cenk Çetin | **Tarih:** December 2025 | **Final Score:** 480/480 ✨
+## 📋 Hackathon Hakkında
 
----
-
-## 📋 Hackathon Özeti
-
-Bu proje, **AI Builder Challenge 2-Day Hackathon** için geliştirilen "Broken Calculator Agent" challenge'ının başarılı şekilde tamamlanmış halidir. Projede gizli olan **100+ kritik hata** başarıyla tespit edilerek düzeltilmiş, yeni **Unit Converter** modülü eklenmiş, profesyonel **CI/CD pipeline** kurulmuş ve **Docker containerization** uygulanmıştır.
-
+Bu proje, AI Builder Challenge 2-Day Hackathon için hazırlanmış bir "Broken Calculator Agent" challenge'ıdır. Projede 12 kritik hata ve 100+ derleme hatası gizlidir. Katılımcıların görevi bu hataları tespit edip düzeltmek ve projeye yeni bir modül eklemektir.
 
 ### 🎯 Hackathon Hedefleri 
 
 - ✅ **Gün 1**: Syntax ve runtime hatalarını bulup düzeltmek (Tamamlandı)
 - ✅ **Gün 2**: Silent failures'ı tespit etmek ve yeni modül eklemek (Tamamlandı)
-- ✅ **Bonus**: CI/CD pipeline kurmak, mimari Arttırma ve dokümantasyon tamamlamak (Tamamlandı)
+- ✅ **Bonus**: CI/CD pipeline kurmak, Docker, mimari Arttırma ve dokümantasyon tamamlamak (Tamamlandı)
 
 ### 📊 Final Puanlama
 
@@ -24,11 +19,11 @@ Bu proje, **AI Builder Challenge 2-Day Hackathon** için geliştirilen "Broken C
 | Level 1 Hatalar (Syntax) | ✅ 4/4 | 40/40 |
 | Level 2 Hatalar (Runtime) | ✅ 5/5 | 100/100 |
 | Level 3 Hatalar (Silent Failures) | ✅ 8/8 | 240/240 |
-| Bonus Modül (Unit Converter) | ✅ Eklendi | 40/40 |
-| CI/CD Pipeline | ✅ Tamamlandı | 20/20 |
-| **Bonus: Docker** | ✅ **YENİ** | **+30/30** |
-| Dokümantasyon | ✅ Tamamlandı | 10/10 |
-| **TOPLAM** | **✅ BAŞARILI** | **480/480** |
+| **Mimari Arttırıldı Modül** (Unit Converter) | ✅ Eklendi | 40/40 |
+| **CI/CD Pipeline** | ✅ Tamamlandı | 20/20 |
+| **Detaylı Dokümantasyon** | ✅ Tamamlandı | 10/10 |
+| **Docker** | ✅ Tamamlandı | - |
+| **TOPLAM** | **✅ BAŞARILI** | **450 + Docker** |
 
 ---
 
@@ -90,7 +85,7 @@ pip install -r requirements.txt
 # .env dosyası zaten hazırlanmış, check edin:
 cat .env
 # İçerik:
-# GEMINI_API_KEY=AIzaSyDienye7JRpbDKf3gFQn3P4UuJ-Vvv7Rgg
+# GEMINI_API_KEY=
 # GEMINI_MODEL=gemini-2.0-flash
 # RATE_LIMIT_CALLS_PER_MINUTE=60
 ```
@@ -130,7 +125,7 @@ docker build -t calculator-agent:latest .
 
 ```bash
 docker run -it \
-  -e GEMINI_API_KEY=AIzaSyDienye7JRpbDKf3gFQn3P4UuJ-Vvv7Rgg \
+  -e GEMINI_API_KEY= SECRET KEY \
   -e GEMINI_MODEL=gemini-2.0-flash \
   --name calculator \
   calculator-agent:latest
@@ -507,7 +502,7 @@ GEMINI_MODEL=gemini-1.5-pro
 
 **ÇÖZÜM:**
 ```bash
-GEMINI_API_KEY=AIzaSyDienye7JRpbDKf3gFQn3P4UuJ-Vvv7Rgg
+GEMINI_API_KEY= SECRET KEY
 GEMINI_MODEL=gemini-2.0-flash
 RATE_LIMIT_CALLS_PER_MINUTE=60
 TEMPERATURE=0.1
@@ -901,7 +896,9 @@ pytest tests/modules/test_unit_converter.py -v
 
 - ✅ **Error Handling:** Invalid units, malformed expressions
 
-### Test Sonuçları
+
+### Test Sonuçları: ✅ TÜM TESTLER BAŞARILI
+
 ```
 ✅ test_parse_km_to_miles                      GEÇTİ
 ✅ test_parse_celsius_to_fahrenheit            GEÇTİ
@@ -929,12 +926,6 @@ pytest tests/modules/test_unit_converter.py -v
 
 TOTAL: 30+ Test Cases ✅ GEÇTİ | Bir de benim içim geçti hocam (:
 ```
-
----
-
-## 🧪 Test Sonuçları
-
-### Genel Test Durumu: ✅ TÜM TESTLER BAŞARILI
 
 ```
 ════════════════════════════════════════════════════════════
@@ -1106,9 +1097,9 @@ ai-builder-challenge-hackathon/
 - ✅ Tüm özel karakterler whitelist'i
 
 ### 4. Exception Handling
-- ✅ Custom exception hierarchy
-- ✅ Security violations ayrı olarak loglanır
-- ✅ API errors gracefully handled
+- ✅ Özelleştirilmiş exception hiyerarşisi
+- ✅ Güvenlik ihlalleri ayrı loglanıyor
+- ✅ API hataları kontrollü şekilde ele alındı
 
 ---
 
@@ -1133,12 +1124,12 @@ ai-builder-challenge-hackathon/
 | 15 | Level 3 | equation_solver.py | Kök manipülasyonu | 1.1 çarpan ve -0.1 sil | 30 |
 | 16 | Level 3 | parser.py | Random module seçim | Random kodu sil | 30 |
 | 17 | Level 3 | logger.py | Level mismatch | Logger-handler level eşitle | 30 |
+| 🎯 | **CI/CD** | .github/workflows/ci.yml | NEW PIPELINE | GitHub Actions setup | 20 |
+| 🎯 | **Doküman** | README.md | Eksik Dokümantasyon | Proje notları ve kurulumu ekle | 10 |
 | 🎯 | **Bonus Mimari Arttırıldı** | unit_converter.py | NEW MODULE | Birim çevirici modülü ekle | 40 |
-| 🚀 | **CI/CD** | .github/workflows/ci.yml | NEW PIPELINE | GitHub Actions setup | 20 |
-| 🎯 | **Bonus** | unit_converter.py | NEW MODULE | Birim çevirici modülü ekle | 40 |
+| 🎯 | **Bonus Docker** | Dockerfile | Konteyner Yapısı | Uygulamayı Dockerize et | - |
 
-
-**TOPLAM: 450 PUAN ✅**
+**TOPLAM: 450 PUAN + Docker ✅**
 
 ---
 
