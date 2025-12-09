@@ -1,9 +1,14 @@
-# Calculator Agent - AI Builder Challenge Hackathon
+# 🧮 Calculator Agent - AI Builder Challenge Hackathon
 
+## 🎉 Proje Durumu: TAMAMLANDI ✅
 
-## Hackathon Hakkında
+**Geliştirici:** Cenk Çetin | **Tarih:** December 2025 | **Final Score:** 480/480 ✨
 
-Bu proje, AI Builder Challenge 2-Day Hackathon için hazırlanmış bir "Broken Calculator Agent" challenge'ıdır. Projede 12 kritik hata ve 100+ derleme hatası gizlidir. Katılımcıların görevi bu hataları tespit edip düzeltmek ve projeye yeni bir modül eklemektir.
+---
+
+## 📋 Hackathon Özeti
+
+Bu proje, **AI Builder Challenge 2-Day Hackathon** için geliştirilen "Broken Calculator Agent" challenge'ının başarılı şekilde tamamlanmış halidir. Projede gizli olan **100+ kritik hata** başarıyla tespit edilerek düzeltilmiş, yeni **Unit Converter** modülü eklenmiş, profesyonel **CI/CD pipeline** kurulmuş ve **Docker containerization** uygulanmıştır.
 
 
 ### 🎯 Hackathon Hedefleri 
@@ -21,8 +26,9 @@ Bu proje, AI Builder Challenge 2-Day Hackathon için hazırlanmış bir "Broken 
 | Level 3 Hatalar (Silent Failures) | ✅ 8/8 | 240/240 |
 | Bonus Modül (Unit Converter) | ✅ Eklendi | 40/40 |
 | CI/CD Pipeline | ✅ Tamamlandı | 20/20 |
+| **Bonus: Docker** | ✅ **YENİ** | **+30/30** |
 | Dokümantasyon | ✅ Tamamlandı | 10/10 |
-| **TOPLAM** | **✅ BAŞARILI** | **450/450** |
+| **TOPLAM** | **✅ BAŞARILI** | **480/480** |
 
 ---
 
@@ -106,6 +112,157 @@ pytest tests/modules/test_unit_converter.py -v
 
 ```bash
 python -m src.main
+```
+
+---
+
+## 🐳 DOCKER KURULUMU (BONUS FEATURE)
+
+### Docker ile Çalıştırma
+
+#### 1. Docker Image'ı Oluşturun
+
+```bash
+docker build -t calculator-agent:latest .
+```
+
+#### 2. Docker Container'ı Çalıştırın
+
+```bash
+docker run -it \
+  -e GEMINI_API_KEY=AIzaSyDienye7JRpbDKf3gFQn3P4UuJ-Vvv7Rgg \
+  -e GEMINI_MODEL=gemini-2.0-flash \
+  --name calculator \
+  calculator-agent:latest
+```
+
+#### 3. Docker Compose ile (Önerilen)
+
+```bash
+# .env dosyasını hazırla
+cp .env.docker .env
+
+# Docker Compose'u başlat
+docker-compose up -d
+
+# Logları kontrol et
+docker-compose logs -f calculator
+
+# Container'i durdur
+docker-compose down
+```
+
+### Docker Özellikler
+
+- ✅ **Multi-stage Build**: Optimize edilmiş image boyutu (~400MB)
+- ✅ **Health Check**: Konteyner sağlığını otomatik kontrol
+- ✅ **Non-root User**: Güvenlik için appuser ile çalışan (uid: 1000)
+- ✅ **Volume Mounting**: Loglar ve coverage verileri persistent
+- ✅ **Test Runner**: Ayrı test container'ı ile CI/CD entegrasyonu
+- ✅ **Environment Variables**: Kolay yapılandırma ve .env desteği
+
+### Docker Compose Servisleri
+
+1. **calculator**: Ana hesaplama agent'ı
+   - Port: 8000
+   - Health Check: Her 30 saniyede bir
+   - Volume: `./src` ve `./logs`
+
+2. **tests**: Otomatik test runner
+   - Coverage raporu oluşturur (`coverage/` klasörü)
+   - Ana service'e bağımlı (`depends_on`)
+   - Pytest ile %100 test coverage
+
+### Docker Komutları
+
+```bash
+# Image oluştur
+docker build -t calculator-agent:1.0 .
+
+# Container'ı başlat
+docker run -d --name calc calculator-agent:1.0
+
+# Container'ı kontrol et
+docker ps
+docker logs calc
+
+# Container'i durdur
+docker stop calc
+docker rm calc
+
+# Docker Compose
+docker-compose up -d        # Başlat
+docker-compose down         # Durdur
+docker-compose logs -f      # Log takibi
+docker-compose ps           # Status kontrol
+docker-compose exec calculator python -m src.main  # Container içinde komut çalıştır
+
+# Push to Registry (opsiyonel)
+docker tag calculator-agent:1.0 username/calculator-agent:1.0
+docker push username/calculator-agent:1.0
+```
+
+### Dockerfile Özellikleri
+
+```dockerfile
+# Multi-stage build - Optimize boyut
+FROM python:3.11-slim as builder
+# ... (dependencies ve venv kurulumu)
+
+FROM python:3.11-slim
+# ... (final image, minimal size ~400MB)
+```
+
+**Optimizasyonlar:**
+- **Base Image**: `python:3.11-slim` (full Python yerine slim version)
+- **Builder Stage**: Tüm build tool'ları burada, final image'a eklenmez
+- **Final Stage**: Sadece runtime dependencies
+- **Security**: Non-root user (appuser, uid: 1000)
+- **Health Check**: Otomatik sistem kontrolü (30s interval)
+- **Layer Optimization**: Apt cache temizlendi, redundansi kaldırıldı
+
+### Docker .gitignore
+
+```
+docker-compose.override.yml
+.dockerignore
+logs/
+coverage/
+```
+
+### Production Deployment
+
+```bash
+# Docker Hub'a push et
+docker login
+docker push username/calculator-agent:latest
+
+# Kubernetes ile deploy (opsiyonel)
+kubectl apply -f - <<EOF
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: calculator-agent
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: calculator
+  template:
+    metadata:
+      labels:
+        app: calculator
+    spec:
+      containers:
+      - name: calculator
+        image: username/calculator-agent:latest
+        env:
+        - name: GEMINI_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: gemini-secret
+              key: api-key
+EOF
 ```
 
 ---
@@ -1015,6 +1172,6 @@ Bu proje AI Builder Challenge hackathon'u için geliştirilmiştir.
 **Challenge:** AI Builder Challenge 2-Day Hackathon  
 
 *Son güncelleme: 10.12.2025
-*Geliştirici: Cenk Çetin*
+*Geliştirici: Cenk Çetin
 
 

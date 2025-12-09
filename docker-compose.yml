@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  calculator:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: calculator-agent
+    environment:
+      GEMINI_API_KEY: ${GEMINI_API_KEY}
+      GEMINI_MODEL: ${GEMINI_MODEL:-gemini-2.0-flash}
+      RATE_LIMIT_CALLS_PER_MINUTE: ${RATE_LIMIT_CALLS_PER_MINUTE:-60}
+      TEMPERATURE: ${TEMPERATURE:-0.1}
+      TOP_P: ${TOP_P:-0.95}
+      MAX_OUTPUT_TOKENS: ${MAX_OUTPUT_TOKENS:-2048}
+      MAX_RETRIES: ${MAX_RETRIES:-3}
+      RETRY_BACKOFF_BASE: ${RETRY_BACKOFF_BASE:-2}
+      DEFAULT_CURRENCY: ${DEFAULT_CURRENCY:-TRY}
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+    volumes:
+      - ./src:/app/src
+      - ./logs:/app/logs
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import src.main; print('healthy')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
+
+  # Optional: Test runner container
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: calculator-tests
+    environment:
+      GEMINI_API_KEY: ${GEMINI_API_KEY}
+      GEMINI_MODEL: ${GEMINI_MODEL:-gemini-2.0-flash}
+    volumes:
+      - ./tests:/app/tests
+      - ./src:/app/src
+      - ./coverage:/app/coverage
+    command: pytest tests/ -v --cov=src --cov-report=html:/app/coverage
+    depends_on:
+      - calculator
+    restart: "no"
+
+volumes:
+  logs:
+  coverage:
