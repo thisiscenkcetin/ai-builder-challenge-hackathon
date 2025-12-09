@@ -8,9 +8,9 @@ Bu proje, AI Builder Challenge 2-Day Hackathon için hazırlanmış bir "Broken 
 
 ### 🎯 Hackathon Hedefleri 
 
-- ✅ **Gün 1**: Syntax ve runtime hatalarını bulup düzeltmek (Completed)
-- ✅ **Gün 2**: Silent failures'ı tespit etmek ve yeni modül eklemek (Completed)
-- ✅ **Bonus**: CI/CD pipeline kurmak ve dokümantasyon tamamlamak (Completed)
+- ✅ **Gün 1**: Syntax ve runtime hatalarını bulup düzeltmek (Tamamlandı)
+- ✅ **Gün 2**: Silent failures'ı tespit etmek ve yeni modül eklemek (Tamamlandı)
+- ✅ **Bonus**: CI/CD pipeline kurmak, mimari Arttırma ve dokümantasyon tamamlamak (Tamamlandı)
 
 ### 📊 Final Puanlama
 
@@ -41,9 +41,7 @@ Google Gemini 2.0 Flash Gen AI SDK kullanılarak geliştirilmiş, modüler ve ge
   - Finansal Hesaplamalar (NPV, IRR, faiz, kredi)
   - Denklem Çözücü (doğrusal, polinom, diferansiyel)
   - Grafik Çizim (2D/3D plotlar)
-  - **✨ YENİ:** Birim Çevirici (Uzunluk, Ağırlık, Sıcaklık, Döviz Kuru)
-
----
+  - **YENİ(Berkay Hocamızın İstediği Gibi Mimari Arttırıldı):** Birim Çevirici (Uzunluk, Ağırlık, Sıcaklık, Döviz Kuru) 
 
 ---
 
@@ -52,7 +50,7 @@ Google Gemini 2.0 Flash Gen AI SDK kullanılarak geliştirilmiş, modüler ve ge
 ### Gereksinimler
 
 - Python 3.11+
-- Google Gemini API Key: `AIzaSyDienye7JRpbDKf3gFQn3P4UuJ-Vvv7Rgg`
+- Google Gemini API Key 
 - Git
 
 ### Adımlar
@@ -112,7 +110,7 @@ python -m src.main
 
 ---
 
-## 🐛 ÇÖZÜLEN HATALAR - DETAYLı LİSTESİ
+## 🐛 ÇÖZÜLEN HATALAR 
 
 ### LEVEL 1: SYNTAX HATALARI (10 puan/hata) - ✅ 4 HATA ÇÖZÜLDÜ
 
@@ -365,7 +363,7 @@ LOG_LEVEL=INFO
 ```
 
 **AÇIKLAMA:**
-API key güvenle .env dosyasında saklanır (.gitignore içinde), en yeni Gemini 2.0 Flash modeli kullanılır (hızlı ve etkili).
+API key güvenle .env dosyasında saklanır (.gitignore içinde), Gemini 2.0 Flash modeli kullanılır.
 
 ---
 
@@ -500,7 +498,7 @@ async def calculate(self, expression: str, currency: str = None) -> CalculationR
 ```
 
 **AÇIKLAMA:**
-Finansal hesaplamalar tamamen doğru olmalı - bu kritiktir! Faiz oranları ve kredi tutarları manipüle edilmemektedir.
+Finansal hesaplamalar tamamen doğru olmalı... Faiz oranları ve kredi tutarları manipüle edilmemektedir.
 
 ---
 
@@ -597,7 +595,7 @@ def parse(self, user_input: str) -> Tuple[str, str]:
 ```
 
 **AÇIKLAMA:**
-Komut işleme deterministik olmalı - rastgele seçimler yapılmaz. Aynı input her zaman aynı module'e yönlendirilir.
+Komut işleme deterministik olmalı ve rastgele seçimler yapılmaz. Aynı input her zaman aynı modüle yönlendirilir.
 
 ---
 
@@ -748,31 +746,31 @@ pytest tests/modules/test_unit_converter.py -v
 
 ### Test Sonuçları
 ```
-✅ test_parse_km_to_miles                      PASSED
-✅ test_parse_celsius_to_fahrenheit            PASSED
-✅ test_parse_decimal_values                   PASSED
-✅ test_km_to_miles                            PASSED
-✅ test_m_to_cm                                PASSED
-✅ test_inch_to_cm                             PASSED
-✅ test_ft_to_m                                PASSED
-✅ test_kg_to_lb                               PASSED
-✅ test_g_to_mg                                PASSED
-✅ test_lb_to_kg                               PASSED
-✅ test_ton_to_kg                              PASSED
-✅ test_celsius_to_fahrenheit                  PASSED
-✅ test_fahrenheit_to_celsius                  PASSED
-✅ test_celsius_to_kelvin                      PASSED
-✅ test_is_length_unit                         PASSED
-✅ test_is_weight_unit                         PASSED
-✅ test_is_temperature_unit                    PASSED
-✅ test_is_currency                            PASSED
-✅ test_usd_to_try                             PASSED
-✅ test_eur_to_gbp                             PASSED
-✅ test_calculate_length_conversion            PASSED
-✅ test_calculate_temperature_conversion       PASSED
+✅ test_parse_km_to_miles                      GEÇTİ
+✅ test_parse_celsius_to_fahrenheit            GEÇTİ
+✅ test_parse_decimal_values                   GEÇTİ
+✅ test_km_to_miles                            GEÇTİ
+✅ test_m_to_cm                                GEÇTİ
+✅ test_inch_to_cm                             GEÇTİ
+✅ test_ft_to_m                                GEÇTİ
+✅ test_kg_to_lb                               GEÇTİ
+✅ test_g_to_mg                                GEÇTİ
+✅ test_lb_to_kg                               GEÇTİ
+✅ test_ton_to_kg                              GEÇTİ
+✅ test_celsius_to_fahrenheit                  GEÇTİ
+✅ test_fahrenheit_to_celsius                  GEÇTİ
+✅ test_celsius_to_kelvin                      GEÇTİ
+✅ test_is_length_unit                         GEÇTİ
+✅ test_is_weight_unit                         GEÇTİ
+✅ test_is_temperature_unit                    GEÇTİ
+✅ test_is_currency                            GEÇTİ
+✅ test_usd_to_try                             GEÇTİ
+✅ test_eur_to_gbp                             GEÇTİ
+✅ test_calculate_length_conversion            GEÇTİ
+✅ test_calculate_temperature_conversion       GEÇTİ
 ✅ ... ve 8+ test daha
 
-TOTAL: 30+ Test Cases ✅ PASSED
+TOTAL: 30+ Test Cases ✅ GEÇTİ | Bir de benim içim geçti hocam (:
 ```
 
 ---
@@ -787,10 +785,10 @@ TOTAL: 30+ Test Cases ✅ PASSED
 ════════════════════════════════════════════════════════════
 
 ✅ Unit Tests: BAŞARILI
-   - Core Module Tests: ✓ Passed
-   - Module Tests: ✓ Passed  
-   - Unit Converter Tests: ✓ Passed (30+ test case)
-   - Integration Tests: ✓ Passed
+   - Core Module Tests: ✓ GEÇTİ
+   - Module Tests: ✓ GEÇTİ  
+   - Unit Converter Tests: ✓ GEÇTİ (30+ test case)
+   - Integration Tests: ✓ GEÇTİ
 
 ✅ Coverage Raporu:
    - src/modules/: 100%
@@ -1031,7 +1029,7 @@ Bu proje AI Builder Challenge hackathon'u için geliştirilmiştir.
 
 **Challenge:** AI Builder Challenge 2-Day Hackathon  
 
-*Son güncelleme: 9.12.2025
+*Son güncelleme: 10.12.2025
 *Geliştirici: Cenk Çetin*
 
 
