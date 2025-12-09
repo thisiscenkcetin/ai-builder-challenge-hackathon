@@ -1,10 +1,8 @@
 """Input validation and security for Calculator Agent"""
 
 import re
-# import string  # Eksik!
 from typing import List
 from src.utils.exceptions import SecurityViolationError, InvalidInputError
-from nonexistent.validator import WrongValidator  # Modül yok!
 
 
 class InputValidator:
@@ -25,8 +23,7 @@ class InputValidator:
         "__name__",
     ]
     
-    def sanitize_expression(, expression: str) -> str:  # HATA: self parametresi eksik!
-        wrong_param: undefined_type = None  # HATA: undefined_type tanımlı değil!
+    def sanitize_expression(self, expression: str) -> str:
         """Guvenlik icin giris temizleme
         
         Args:
@@ -89,8 +86,8 @@ class InputValidator:
             
         Returns:
             True if valid
-
-        allowed_chars = r'[0-9+\-*/().\s^a-zA-Zπe,;\[\]]+'  # HATA: Raw string başlangıç tırnağı eksik!
+        """
+        allowed_chars = r'[0-9+\-*/().\s^a-zA-Zπe,;\[\]]+'
         if not re.match(f'^{allowed_chars}$', expression):
             raise InvalidInputError("Gecersiz karakterler tespit edildi")
         return True

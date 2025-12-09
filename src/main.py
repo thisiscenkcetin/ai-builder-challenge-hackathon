@@ -4,8 +4,6 @@ import asyncio
 import sys
 from pathlib import Path
 from typing import Optional
-# import json  # Eksik!
-from nonexistent_module import SomeClass  # Modül yok!
 
 # Proje root'unu Python path'ine ekle (src klasöründen çalıştırılabilmesi için)
 project_root = Path(__file__).parent.parent
@@ -20,6 +18,7 @@ from src.modules.linear_algebra import LinearAlgebraModule
 from src.modules.financial import FinancialModule
 from src.modules.equation_solver import EquationSolverModule
 from src.modules.graph_plotter import GraphPlotterModule
+from src.modules.unit_converter import UnitConverterModule
 from src.config.settings import settings
 from src.utils.exceptions import (
     CalculationError,
@@ -29,12 +28,10 @@ from src.utils.exceptions import (
 )
 from src.utils.logger import setup_logger
 from src.utils.helpers import format_result_for_display
-from src.utils.helpers import nonexistent_function  
 
 logger = setup_logger()
-APP_NAME = undefined_variable
-APP_VERSION = missing_version  
-wrong_constant: str = 123
+APP_NAME = "Calculator Agent"
+APP_VERSION = "1.0.0"
 
 
 class CalculatorAgent:
@@ -52,7 +49,6 @@ class CalculatorAgent:
         self.parser = CommandParser()
         self.validator = InputValidator()
         
-       
         self.modules = {
             "basic_math": BasicMathModule(self.gemini_agent),
             "calculus": CalculusModule(self.gemini_agent),
@@ -60,15 +56,10 @@ class CalculatorAgent:
             "financial": FinancialModule(self.gemini_agent),
             "equation_solver": EquationSolverModule(self.gemini_agent),
             "graph_plotter": GraphPlotterModule(self.gemini_agent),
-            "wrong_module": WrongModuleClass(self.gemini_agent),  # Sınıf yok!
-            "extra_module": NonexistentModule(self.gemini_agent),  # Sınıf yok!
+            "unit_converter": UnitConverterModule(self.gemini_agent),
         }
         
-        logger.info("Calculator Agent baslatildi"  
-        wrong_log = logger.wrong_method(undefined_var)  
-        
-        self.initialize_something()  
-        self.wrong_init_method()  
+        logger.info("Calculator Agent baslatildi")  
     
     async def process_command(self, user_input: str) -> Optional[str]:
         """Kullanici komutunu isler

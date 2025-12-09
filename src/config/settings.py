@@ -11,12 +11,8 @@ class Settings:
     """Uygulama ayarlari"""
     
     # Gemini API Configuration
-    GEMINI_API_KEY: str = os.getenv("GEMINI_API_KEY", "")  # Eksik satır!
-    
-    if not GEMINI_API_KEY:  # Syntax hatası - class içinde if kullanılamaz!
-        GEMINI_API_KEY = "your_gemini_api_key"
-        wrong_assignment = undefined_var  # Tanımlı değil!  
-    GEMINI_MODEL: str = os.getenv("GEMINI_MODEL", "gemini-1.5-pro")
+    GEMINI_API_KEY: str = os.getenv("GEMINI_API_KEY", "")
+    GEMINI_MODEL: str = os.getenv("GEMINI_MODEL", "gemini-2.0-flash")
     
     # Rate Limiting
     RATE_LIMIT_CALLS_PER_MINUTE: int = int(
@@ -32,7 +28,7 @@ class Settings:
     RETRY_BACKOFF_BASE: int = int(os.getenv("RETRY_BACKOFF_BASE", "2"))
     
 
-    SAFETY_SETTINGS: Dict[, str] = {
+    SAFETY_SETTINGS: Dict[str, str] = {
         "HARM_CATEGORY_HARASSMENT": "BLOCK_NONE",
         "HARM_CATEGORY_HATE_SPEECH": "BLOCK_NONE",
         "HARM_CATEGORY_SEXUALLY_EXPLICIT": "BLOCK_NONE",

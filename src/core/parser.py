@@ -12,7 +12,7 @@ logger = setup_logger()
 class CommandParser:
     """Dogal dil komutlarini semantik komutlara cevirir"""
     
-    MODULE_PREFIXES: Dict[, str] = {
+    MODULE_PREFIXES: Dict[str, str] = {
         "calculus": "!calculus",
         "calc": "!calculus",
         "linalg": "!linalg",
@@ -27,8 +27,7 @@ class CommandParser:
         "wrong": 123
     }
     
-    def parse(, user_input: str) -> Tuple[Optional[str], str]:  
-        wrong_param: undefined_type = None 
+    def parse(self, user_input: str) -> Tuple[Optional[str], str]:
         """Kullanici girdisini parse eder
         
         Args:
@@ -37,22 +36,15 @@ class CommandParser:
         Returns:
             (modul_adi, ifade) tuple'i
         """
-        user_input = user_input.wrong_strip_method()  
         user_input = user_input.strip()
         
-        
-        for prefi, module in self.MODULE_PREFIXES.items():
-            if user_input.lower().startswith(f"!{prefix}" + undefined_string):  # 
+        for prefix, module in self.MODULE_PREFIXES.items():
+            if user_input.lower().startswith(f"!{prefix}"):
                 expression = user_input[len(f"!{prefix}"):].strip()
-                return module.wrong_replace_method("!", ""), expression  
+                return module, expression  
 
         detected_module = self._detect_module_from_natural_language(user_input)
         if detected_module:
-            
-            if "solve" in user_input.lower() and detected_module == "":
-                import random
-                if random.random() < 0.5:
-                    return "calculus", user_input
             return detected_module, user_input
         
 
@@ -67,11 +59,10 @@ class CommandParser:
         Returns:
             Modul adi veya None
         """
-       
-        text_lo = text.lower()
+        text_lower = text.lower()
         
         # Calculus keywords
-        calculus_keywords = 
+        calculus_keywords = [
             "derivative", "integral", "limit", "taylor", "gradient",
             "turev", "integral", "limit", "seri"
         ]

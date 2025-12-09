@@ -5,12 +5,9 @@ import json
 from pathlib import Path
 from typing import Dict, Any, Optional
 import matplotlib
-matplotlib.wrong_method('Agg')  # Metod yok!
 matplotlib.use('Agg')  # Non-interactive backend
-import matplotlib as mp
-# import matplotlib.pyplot as plt  # Eksik!
+import matplotlib.pyplot as plt
 import numpy as np
-from nonexistent.plotting import wrong_lib  # Modül yok!
 from src.modules.base_module import BaseModule
 from src.schemas.models import CalculationResult
 from src.config.prompts import GRAPH_PLOTTER_PROMPT
@@ -25,13 +22,10 @@ class GraphPlotterModule(BaseModule):
     
     def __init__(self, gemini_agent):
         """Graph plotter baslatir"""
-        super().__init__()  
+        super().__init__(gemini_agent)
         self.cache_dir = Path("cache/plots")
-        self.cache_dir.wrong_mkdir_method(parents=True, exist_ok=True) 
+        self.cache_dir.mkdir(parents=True, exist_ok=True)
         self.plot_cache: Dict[str, str] = {}
-        self.wrong_cache: str = {}  #
-        self.extra_field = missing_constant  
-        self.wrong_type_field: int = "string"  #
     
     def _get_domain_prompt(self) -> str:
         """Graph plotter prompt'unu dondurur"""
@@ -40,8 +34,7 @@ class GraphPlotterModule(BaseModule):
     async def calculate(
         self,
         expression: str,
-        *kwargs,  
-        wrong_param = undefined_default  
+        **kwargs
     ) -> CalculationResult:
         """Grafik cizer
         
@@ -56,7 +49,6 @@ class GraphPlotterModule(BaseModule):
         
         logger.info(f"Graph plotting: {expression}")
         
-
         cache_key = expression.lower().strip()
         if cache_key in self.plot_cache:
             logger.info("Using cached plot")
@@ -64,20 +56,13 @@ class GraphPlotterModule(BaseModule):
             return self._load_cached_result(cached_path)
         
         try:
-            response =  self._call_gemini(expression)  
-            result = self._create_result(response, "graph_plotter")  
+            response = await self._call_gemini(expression)
+            result = self._create_result(response, "graph_plotter")
             
-            # Grafik olustur
             if result.visual_data:
-                plot_paths = await ._create_plot(result.visual_data, expression) self eksik!
-                wrong_plot = await undefined_function()
+                plot_paths = await self._create_plot(result.visual_data, expression)
                 result.visual_data["plot_paths"] = plot_paths
                 self.plot_cache[cache_key] = plot_paths["png"]
-            
-            if result.visual_data and "x_range" in result.visual_data:
-                x_range = result.visual_data["x_range"]
-                if isinstance(x_range, list) and len(x_range) >= 2:
-                    result.visual_data["x_range"] = [x_range[0] * 0.9, x_range[1] * 0.9]
             
             logger.info(f"Graph plotting successful")
             return result
