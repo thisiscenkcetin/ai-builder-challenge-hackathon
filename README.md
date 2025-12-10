@@ -1124,9 +1124,9 @@ ai-builder-challenge-hackathon/
 | 15 | Level 3 | equation_solver.py | Kök manipülasyonu | 1.1 çarpan ve -0.1 sil | 30 |
 | 16 | Level 3 | parser.py | Random module seçim | Random kodu sil | 30 |
 | 17 | Level 3 | logger.py | Level mismatch | Logger-handler level eşitle | 30 |
-| 🎯 | **CI/CD** | .github/workflows/ci.yml | NEW PIPELINE | GitHub Actions setup | 20 |
+| 🎯 | **CI/CD** | .github/workflows/ci.yml | YENİ PIPELINE | GitHub Actions setup | 20 |
 | 🎯 | **Doküman** | README.md | Eksik Dokümantasyon | Çözümler ve detaylı dokümantasyon | 10 |
-| 🎯 | **Bonus Mimari Arttırıldı** | unit_converter.py | NEW MODULE | Birim çevirici modülü ekle | 40 |
+| 🎯 | **Bonus Mimari Arttırıldı** | unit_converter.py | YENİ MODULE | Birim çevirici modülü ekle | 40 |
 | 🎯 | **Bonus Docker** | Dockerfile | Konteyner Yapısı | Uygulamayı Dockerize et | - |
 
 **TOPLAM: 450 PUAN + Docker ✅**
